@@ -1,0 +1,178 @@
+:root{--ink:#17151a;--butter:#f6c945;--meadow:#8fc98b;--bleu:#2f4fbf;--rouge:#e23d3d;--paper:#fff6e0}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;font:19px/1.6 'Nunito','Trebuchet MS',sans-serif;color:var(--paper);background:linear-gradient(#171a3d,#3b2f6b 65%,#6d4577);background-attachment:fixed;overflow-x:hidden}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(2px 2px at 10% 20%,#fff,transparent),radial-gradient(2px 2px at 70% 10%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 35%,#fff,transparent),radial-gradient(2px 2px at 88% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 25% 8%,#fff,transparent);animation:tw 3s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.25}}
+h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:800;line-height:1.1}
+h1{font-size:clamp(2.3rem,8vw,4.2rem);text-align:center;margin:.4em 0 .2em}
+h2{font-size:1.7rem;margin-bottom:.4em}
+.sub{text-align:center;font-style:italic;opacity:.9;margin-bottom:1.5em}
+.wrap{max-width:780px;margin:0 auto;padding:76px 20px 80px;position:relative}
+.c{text-align:center}
+nav{position:fixed;top:10px;left:50%;translate:-50% 0;z-index:9;display:flex;gap:4px;background:#17151acc;padding:5px 10px;border-radius:99px}
+nav a{text-decoration:none;font-size:1.4rem;padding:0 8px;border-radius:99px;transition:transform .2s}
+nav a:hover{transform:scale(1.3) rotate(-8deg)}nav a.on{background:var(--butter)}
+button,.btn{display:inline-block;font:700 1rem 'Fraunces',Georgia,serif;background:var(--butter);color:var(--ink);border:0;border-radius:99px;padding:11px 24px;cursor:pointer;text-decoration:none;box-shadow:0 5px 0 #a98617;transition:transform .15s}
+button:hover,.btn:hover{transform:translateY(-3px) rotate(-1.5deg)}button:active{transform:translateY(3px);box-shadow:0 1px 0 #a98617}
+:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.card{background:#17151acc;border:2px solid #fff3;border-radius:22px;padding:22px 26px;margin:24px 0}
+.sp{position:fixed;z-index:20;pointer-events:none;font-size:1.3rem;animation:sp 1.4s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--dx),var(--dy)) rotate(360deg);opacity:0}}
+.fall{position:fixed;top:-50px;z-index:20;pointer-events:none;font-size:2rem;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+/* envelope */
+.env{position:relative;width:min(340px,86vw);height:220px;margin:6vh auto 0;background:#e8c9a0;border-radius:6px;box-shadow:0 24px 40px #0007;transition:opacity .8s,transform .8s}
+.flap{position:absolute;inset:0 0 auto;height:135px;background:#d4a972;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s;z-index:3}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.paper{position:absolute;left:6%;right:6%;bottom:8px;height:170px;background:var(--paper);border-radius:4px;transition:transform 1s .7s,opacity .6s 1.4s;z-index:1}
+.env.open .paper{transform:translateY(-150px);opacity:0}
+.env.gone{opacity:0;transform:scale(.8);pointer-events:none;height:0;margin:0;overflow:hidden}
+.seal{position:absolute;z-index:4;left:50%;top:104px;width:62px;height:62px;margin-left:-31px;border-radius:50%;font-size:1.9rem;padding:0;background:var(--butter);animation:pulse 1.6s infinite}
+.env.open .seal{animation:crack .7s forwards}
+@keyframes pulse{50%{transform:scale(1.15);box-shadow:0 0 28px var(--butter)}}
+@keyframes crack{to{transform:scale(2.4) rotate(40deg);opacity:0}}
+.owl{position:fixed;top:14%;left:-90px;font-size:3.4rem;z-index:15;pointer-events:none}
+.owl.go{animation:fly 3.2s ease-in-out forwards}
+@keyframes fly{40%{transform:translate(55vw,-30px) rotate(-10deg)}to{transform:translate(120vw,60px)}}
+.note{display:none;background:var(--paper);color:var(--ink);transform-origin:top;border-radius:6px;padding:26px 30px;font-size:1.1rem;box-shadow:0 20px 40px #0008}
+.note.show{display:block;animation:unfurl 1s cubic-bezier(.2,1.3,.4,1)}
+@keyframes unfurl{from{transform:scaleY(0) rotate(-3deg)}}
+.note h2{color:var(--bleu)}.note p{margin:.7em 0}
+/* train */
+.wall{height:230px;border-radius:10px;background:repeating-linear-gradient(#0000 0 26px,#0007 26px 29px),repeating-linear-gradient(90deg,#0000 0 70px,#0007 70px 73px),#a4543e;display:flex;justify-content:space-around;align-items:center;transition:opacity 1s}
+.wall b{background:#17151a;border:3px solid #e8c37a;color:#e8c37a;font:800 2rem 'Fraunces',serif;padding:4px 22px;border-radius:8px}
+.wall.shake{animation:shake .5s 3}.wall.vanish{opacity:0}
+@keyframes shake{25%{transform:translateX(-8px) rotate(-1deg)}75%{transform:translateX(8px) rotate(1deg)}}
+.rail{border-bottom:6px dashed #fff6;height:60px;margin:20px 0;overflow:hidden}
+.rail span{display:inline-block;font-size:3rem;animation:chug 6s linear infinite}
+@keyframes chug{from{transform:translateX(-80px)}to{transform:translateX(105vw)}}
+.cars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.win{perspective:900px;height:220px;cursor:pointer;border:0;background:none;color:inherit;font:inherit;text-align:left;padding:0;box-shadow:none}
+.win:hover{transform:none}
+.in{position:relative;width:100%;height:100%;transition:transform .8s;transform-style:preserve-3d}
+.win.flip .in{transform:rotateY(180deg)}
+.f,.bk{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.f{background:linear-gradient(#f6c945,#e0a82e);color:var(--ink);font:800 1.2rem 'Fraunces',serif;border:5px solid #17151a}
+.f i{font-size:3.2rem;font-style:normal;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.bk{background:var(--paper);color:var(--ink);transform:rotateY(180deg);font-size:.92rem;line-height:1.4;border:5px solid var(--bleu);overflow:auto}
+.stamps{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px;font-size:.78rem}
+.stamps span{border:2px solid var(--rouge);color:var(--rouge);border-radius:6px;padding:0 6px;font-weight:800;animation:stamp .35s}
+@keyframes stamp{from{transform:scale(3);opacity:0}}
+/* play */
+.dish{width:230px;margin:10px auto;border-bottom:10px solid #e7e1d2;border-radius:0 0 80px 80px/0 0 20px 20px;min-height:40px;display:flex;flex-direction:column-reverse}
+.ly{height:34px;animation:drop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes drop{from{transform:translateY(-160px);opacity:0}}
+.goal{position:relative;width:min(340px,90vw);height:150px;margin:20px auto 0;border:5px solid #fff;border-bottom:0;background:repeating-linear-gradient(45deg,#fff1 0 6px,#0000 6px 12px),#0d3d1f}
+.gk{position:absolute;bottom:8px;left:50%;margin-left:-22px;font-size:2.6rem;transition:left .35s}
+.z{position:absolute;top:0;bottom:0;width:33.3%;cursor:crosshair}
+.ball{display:block;font-size:2.4rem;width:2.4rem;margin:30px auto 0;transition:transform .45s,opacity .3s}
+.score{font:800 1.4rem 'Fraunces',serif}
+.football-reaction{width:min(300px,100%);margin:12px auto 0;padding:12px 18px;border:2px solid #fff5;border-radius:20px;background:#17151acc;animation:reactionPop .3s cubic-bezier(.2,1.4,.5,1)}
+.football-reaction[hidden]{display:none}
+.reaction-art{display:block;width:min(260px,100%);height:190px;object-fit:contain;margin:auto;animation:reactionFlash .65s ease-in-out infinite alternate}
+.football-reaction.happy{border-color:#f6c945;background:linear-gradient(135deg,#31543d,#17151acc)}
+.football-reaction.angry{border-color:#e27b64;background:linear-gradient(135deg,#713a43,#17151acc)}
+.reaction-caption{font:800 1rem 'Fraunces',Georgia,serif;letter-spacing:.04em}
+@keyframes reactionPop{from{transform:scale(.82);opacity:0}}
+@keyframes reactionFlash{to{opacity:.55;transform:scale(.96)}}
+/* finale */
+.rain{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.rain i{position:absolute;top:-30px;width:2px;height:22px;background:#bfe3ff77;animation:rn linear infinite}
+@keyframes rn{to{transform:translateY(110vh)}}
+.hero{display:block;width:min(210px,55vw);height:180px;margin:22px auto 0;padding:0;background:none;color:inherit;border:0;box-shadow:none;cursor:pointer;animation:heroHover 2.8s ease-in-out infinite alternate}
+.hero:hover{transform:translateY(-5px) rotate(-2deg);box-shadow:none}
+.hero svg{display:block;width:100%;height:100%;overflow:visible}
+.hero:focus-visible{outline:4px solid #fff;outline-offset:0;border-radius:50%}
+.hero .cape{transform-origin:42% 50%;animation:capeWave 1.8s ease-in-out infinite alternate}
+@keyframes heroHover{to{translate:0 -9px}}
+@keyframes capeWave{to{transform:skewY(-8deg) scaleX(.95)}}
+.cake{font-size:5rem;position:relative;display:inline-block;cursor:pointer}
+.flame{position:absolute;top:-8px;left:50%;margin-left:-.4em;font-size:2rem;animation:flick .4s infinite alternate}
+@keyframes flick{to{transform:scale(1.15) rotate(5deg)}}
+.out .flame{display:none}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:12}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}.rail span{animation:none}}
+/* Full-viewport illustrated scenes */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.86}
+.wrap,main,footer{position:relative;z-index:1}
+.scene-index{background:linear-gradient(#22294f,#55436f 65%,#74617a)}
+.scene-journey{background:linear-gradient(#191d3b,#4a385f 65%,#71516b)}
+.scene-play{background:linear-gradient(#1d3150,#426b78 65%,#69845f)}
+.scene-finale{background:linear-gradient(#25223f,#604360 65%,#9b625d)}
+.scene-dossier{background:linear-gradient(#202c36,#3a4d4b 65%,#79634d)}
+.scene-ghibli{background:linear-gradient(#1b3540,#34545a 65%,#526851)}
+.paris-tower{animation:towerGlow 4s ease-in-out infinite alternate}
+.tower-star{transform-box:fill-box;transform-origin:center;animation:starPulse 2.4s ease-in-out infinite alternate}
+@keyframes towerGlow{to{filter:drop-shadow(0 0 13px #ffd98a)}}
+@keyframes starPulse{to{opacity:.65;transform:scale(.85)}}
+.oui-toast{position:fixed;z-index:30;top:76px;left:50%;translate:-50% -12px;padding:10px 24px;border:2px solid #ffe8ae;border-radius:999px;background:#29213bea;color:#fff6e0;font:800 clamp(1.2rem,3vw,1.8rem) 'Fraunces',Georgia,serif;letter-spacing:.04em;text-shadow:0 0 12px #ffcf72;box-shadow:0 8px 28px #120e1b88;opacity:0;pointer-events:none}
+.oui-toast.show{animation:ouiFlash 2.4s ease both}
+@keyframes ouiFlash{0%,100%{opacity:0;scale:.85}12%,78%{opacity:1;scale:1}28%,60%{text-shadow:0 0 20px #ffe8ae,0 0 38px #f6c945}}
+.balloon{transform-box:fill-box;transform-origin:center;animation:balloonFloat 3.5s ease-in-out infinite alternate}
+@keyframes balloonFloat{to{transform:translateY(-9px) rotate(2deg)}}
+.birds{animation:birdsGlide 24s linear infinite}
+@keyframes birdsGlide{from{transform:translateX(-90px)}to{transform:translateX(700px)}}
+.train-art{animation:trainRumble 1.3s ease-in-out infinite alternate}
+@keyframes trainRumble{to{translate:4px -3px}}
+.scene-journey .wrap{padding-top:60px}
+.platform-greeting{position:relative;z-index:2;display:block;width:min(360px,88vw);height:88px;margin:-14px auto -6px;overflow:visible;transition:opacity .7s}
+.birthday-letter[hidden]{display:none}
+.birthday-letter{position:relative;z-index:2;width:min(720px,100%);margin:22px auto 34px;scroll-margin-top:86px;animation:letterArrive .8s cubic-bezier(.2,1.2,.4,1) both}
+.letter-paper{position:relative;overflow:hidden;padding:clamp(24px,5vw,48px);border:2px solid #dfbd77;border-radius:8px;background:linear-gradient(135deg,#fff9e8,#f6ebce);color:#272233;text-align:left;box-shadow:0 18px 44px #17151a66,inset 0 0 38px #d9bf8133}
+.letter-paper:before{content:'';position:absolute;inset:10px;border:1px solid #b98d4c55;border-radius:4px;pointer-events:none}
+.letter-heading{position:relative;display:flex;flex-direction:column;gap:2px;padding:0 64px 14px 0;border-bottom:1px solid #b98d4c88;color:#72533c;font:800 1.15rem 'Fraunces',Georgia,serif}
+.letter-date{font:italic .85rem 'Nunito','Trebuchet MS',sans-serif;opacity:.8}
+.letter-paper h2{position:relative;margin:20px 0 10px;color:#563e6f;font-size:1.55rem}
+.letter-content{position:relative;clip-path:inset(0 0 100% 0)}
+.letter-content p{margin:.65em 0;font:1rem/1.75 'Nunito','Trebuchet MS',sans-serif}
+.letter-signoff{margin:14px 0 4px;color:#563e6f;font-weight:700}
+.letter-passport{position:relative;margin-top:24px;padding-top:14px;border-top:1px dashed #b98d4c99}
+.passport-heading{display:block;margin-bottom:12px;color:#72533c;font:800 .9rem 'Fraunces',Georgia,serif;text-align:center}
+.passport-stamps{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+.passport-stamp{display:flex;width:104px;height:104px;flex-direction:column;align-items:center;justify-content:center;border:2px dashed currentColor;border-radius:50%;font-style:normal;line-height:1.05;text-align:center;transform:rotate(-8deg);opacity:.82}
+.passport-stamp b{font-size:.66rem;letter-spacing:.08em}
+.passport-stamp i{margin:4px 0;font-size:1.45rem;font-style:normal;font-weight:900}
+.passport-stamp small{font-size:.48rem;letter-spacing:.08em}
+.passport-paris{color:#a84943}
+.passport-express{color:#526b85;transform:rotate(7deg)}
+.passport-platform{color:#688052;transform:rotate(-4deg)}
+.letter-next{position:relative;margin:22px 0 0;text-align:center}
+.birthday-letter.writing .passport-stamp{animation:passportStamp .45s cubic-bezier(.2,1.5,.5,1) both}
+.birthday-letter.writing .passport-express{animation-delay:.2s}
+.birthday-letter.writing .passport-platform{animation-delay:.4s}
+@keyframes passportStamp{from{opacity:0;scale:2.5}to{opacity:.82;scale:1}}
+.quill{position:absolute;z-index:1;top:24px;right:24px;font-size:3rem;transform-origin:bottom center;animation:quillWrite .55s ease-in-out infinite alternate}
+.quill i{position:absolute;right:0;bottom:1px;width:7px;height:7px;border-radius:50%;background:#69477d;box-shadow:0 0 10px #69477d;animation:inkSpark .8s ease-in-out infinite alternate}
+.birthday-letter.writing .letter-content{animation:inkReveal 7s steps(48,end) forwards}
+.birthday-letter.writing .quill{animation:quillTravel 7s ease-in-out forwards}
+@keyframes letterArrive{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes inkReveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes quillWrite{to{transform:rotate(12deg) translateY(-4px)}}
+@keyframes quillTravel{0%{transform:rotate(0)}20%{transform:rotate(12deg) translateY(40px)}45%{transform:rotate(-8deg) translateY(100px)}70%{transform:rotate(10deg) translateY(165px)}100%{transform:rotate(-6deg) translateY(220px)}}
+@keyframes inkSpark{to{opacity:.3;transform:scale(.6)}}
+.platform-friend{filter:drop-shadow(0 2px 2px #17151a55)}
+.friend-wave{transform-box:fill-box;transform-origin:bottom left;animation:friendWave .65s ease-in-out infinite alternate}
+.friend-middle .friend-wave{animation-delay:-.2s}
+.friend-right .friend-wave{animation-delay:-.4s}
+.waiting-friends .friend-wave{transform-box:fill-box;transform-origin:bottom left;animation:friendWave .65s ease-in-out infinite alternate}
+@keyframes friendWave{to{transform:rotate(-17deg)}}
+.portal-open .platform-greeting{opacity:0;transition-delay:1.5s}
+.waiting-friends{filter:drop-shadow(0 5px 5px #17151a66)}
+.hero-streaks{animation:streakGlow 2.3s ease-in-out infinite alternate}
+@keyframes streakGlow{to{opacity:.25}}
+.book-art{animation:bookShine 4s ease-in-out infinite alternate}
+@keyframes bookShine{to{filter:brightness(1.22)}}
+.forest-trees{transform-origin:center bottom;animation:forestSway 6s ease-in-out infinite alternate}
+@keyframes forestSway{to{transform:skewX(-.5deg)}}
+.pt{position:fixed;top:-20px;z-index:0;pointer-events:none;border-radius:50% 0 50% 0;opacity:.8;animation:pt linear infinite}
+@keyframes pt{to{transform:translate(70px,108vh) rotate(420deg)}}
+.card{position:relative;overflow:hidden;padding-top:32px}
+.card:before{content:'';position:absolute;top:0;left:0;right:0;height:9px;background:conic-gradient(#1f7a55 25%,#17151a 0 50%,#1f7a55 0 75%,#17151a 0) 0 0/18px 18px}
+body{animation:pageEnter .55s ease both}
+body.page-leaving{animation:pageLeave .28s ease forwards}
+@keyframes pageEnter{from{opacity:0}to{opacity:1}}
+@keyframes pageLeave{to{opacity:0}}
+@media(max-width:700px){.bg svg{opacity:.72}}
+@media(prefers-reduced-motion:reduce){.pt,.balloon{display:none}body{animation:none}body.page-leaving{animation:none}.oui-toast.show{animation:none;opacity:1;scale:1}.reaction-art{animation:none}.letter-content{clip-path:none}.birthday-letter.writing .letter-content{animation:none}.birthday-letter.writing .quill{animation:none}.birthday-letter.writing .passport-stamp{animation:none;opacity:.82}}

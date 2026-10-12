@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>An owl delivered this</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦉</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="owl" id="owl">🦉</div>
+<div class="wrap">
+<h1>Something has arrived for Candice</h1>
+<p class="sub" id="hint">It has a wax seal. Do not ignore the wax seal. Tap it.</p>
+<div class="env" id="env"><div class="flap"></div><div class="paper"></div><button class="seal" id="seal" aria-label="Break the seal">🦡</button></div>
+<div class="note" id="note">
+<h2>Dear Candice (Kahn-DEES),</h2>
+<p>That's how it's pronounced. I have said it right every single time. Ask anyone. Actually, don't ask anyone.</p>
+<p class="c"><button id="say">🔊 Hear it, the proper way</button></p>
+<p>By order of the Ministry of Birthdays, <b>13th October</b> is declared a day of dessert, nonsense and loud applause. The Sorting Hat has been consulted about you and refused to deliberate, which in Hat language means "obviously".</p>
+<p>The next three rooms are yours. Mind the soot sprites. If you type <b>oui</b> on your keyboard, something crusty happens.</p>
+<p class="c"><a class="btn" href="journey.html">Board the train 🚂</a></p>
+</div></div>
+<script src="app.js"></script>
+<script>
+$('#seal').onclick=e=>{$('#env').classList.add('open');$('#owl').classList.add('go');burst(e.clientX,e.clientY,['🦡','✨','🧡'],14);
+setTimeout(()=>{$('#env').classList.add('gone');$('#note').classList.add('show');$('#hint').textContent='';},2200)};
+$('#say').onclick=()=>{const u=new SpeechSynthesisUtterance('Candice');u.lang='fr-FR';u.rate=.8;speechSynthesis.speak(u);rain(['🥖'],12)};
+</script></body></html>

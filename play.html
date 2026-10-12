@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The kitchen and the pitch</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍰</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="wrap">
+<h1>The kitchen &amp; the pitch</h1>
+<p class="sub">Two tasks. Both are urgent. Both involve chaos.</p>
+<div class="card c"><h2>Build the tiramisu 🍰</h2>
+<p>Pick-me-up, in Italian. Assemble it layer by layer. Chef Teddy is supervising.</p>
+<div class="dish" id="dish"></div>
+<p><button id="add">Dip the ladyfingers in coffee ☕</button></p><p id="chef" style="min-height:3.2em"></p></div>
+<div class="card c"><h2>Penalty shootout ⚽🇫🇷</h2>
+<p>Five kicks. Choose your corner. The keeper has opinions. Make sure you miss atleast one penalty to reveal the surprise.</p>
+<div class="goal" id="goal"><span class="gk" id="gk">🧤</span><span class="z" style="left:0" data-z="0"></span><span class="z" style="left:33.3%" data-z="1"></span><span class="z" style="left:66.6%" data-z="2"></span></div>
+<span class="ball" id="ball">⚽</span>
+<p class="score" id="sc">Kicks left: 5 · Goals: 0</p><p id="msg" style="min-height:3em"></p></div>
+<div class="football-reaction" id="football-reaction" hidden aria-live="polite">
+<img class="reaction-art" id="reaction-image" alt="">
+<audio id="reaction-audio" preload="auto"></audio>
+<p class="reaction-caption" id="reaction-caption"></p>
+</div>
+<p class="c"><a class="btn" href="finale.html">Last stop: the bus stop 🌧️</a></p>
+</div>
+<script src="app.js"></script>
+<script>
+const L=[['#8a5a3c','☕ Dip the ladyfingers in coffee'],['#fff1c9','☁️ Add a cloud of mascarpone'],['#8a5a3c','☕ Another round of ladyfingers'],['#fff1c9','☁️ More mascarpone, no restraint'],['#4b2c1a','🍫 Snow it with cocoa']];
+let n=0;$('#add').onclick=e=>{if(n>=5)return;const d=document.createElement('div');d.className='ly';d.style.background=L[n][0];$('#dish').appendChild(d);n++;burst(e.clientX,e.clientY,['☕','🍫','✨'],5);
+if(n<5)$('#add').textContent=L[n][1]+'… ';else{$('#add').textContent='Done! 🎉';rain(['🍫','🍰','☕'],14);$('#chef').textContent='🧸 Chef Teddy approves. Estimated survival time of this tiramisu: 4 minutes.'}};
+let k=5,g=0,shooting=false,reactionTimer,reactionToken=0;const reactionAudio=$('#reaction-audio');
+function stopReaction(){reactionToken++;clearTimeout(reactionTimer);reactionAudio.pause();reactionAudio.currentTime=0;$('#football-reaction').hidden=true}
+document.querySelectorAll('.z').forEach(z=>z.onclick=e=>{if(k<=0||shooting)return;shooting=true;stopReaction();const s=+z.dataset.z,kp=Math.floor(Math.random()*3);k--;
+$('#gk').style.left=(kp*33.3+16.6)+'%';$('#ball').style.transform='translate('+((s-1)*110)+'px,-150px) scale(.6)';
+setTimeout(()=>{$('#ball').style.transform='';const scored=kp!==s;if(scored)g++;
+$('#msg').textContent=scored?pick(['BUUUUT! ⚽','Top corner. Absolutely unfair. ⚽','Les Bleus score again! 🇫🇷']):'Saved by the keeper! Pick another corner. 🧤';
+const reaction=$('#football-reaction'),image=$('#reaction-image');reaction.hidden=false;reaction.classList.toggle('happy',scored);reaction.classList.toggle('angry',!scored);
+image.src=scored?'data/kyllian_dictator/happy/image.jpeg':'data/kyllian_dictator/sad/image.jpeg';
+image.alt=scored?'Happy Kyllian dictator meme reaction':'Sad Kyllian dictator meme reaction';
+reactionAudio.pause();reactionAudio.src=scored?'data/kyllian_dictator/happy/audio.mp3':'data/kyllian_dictator/sad/audio.mp3';
+$('#reaction-caption').textContent=scored?'GOAL!':'MISSED!';
+const activeReaction=++reactionToken;
+reactionAudio.play().catch(error=>{if(activeReaction===reactionToken)$('#msg').textContent+=` Audio could not play: ${error.message}`});
+reactionTimer=setTimeout(stopReaction,5000);
+burst(e.clientX,e.clientY,scored?['⚽','🇫🇷','⭐']:['🧤','😤'],8);$('#sc').textContent=k?`Kicks left: ${k} · Goals: ${g}`:`Final score: France ${g} · Keeper ${5-g}`;
+if(!k){$('#msg').textContent=`Full time! France scored ${g} of 5 penalties. ${g>=3?'Allez les Bleus! 🇫🇷':'The keeper had a brilliant match. 🧤'}`;rain(g>=3?['⚽','🇫🇷','⭐']:['🧤','😮'])}shooting=false},450)});
+</script></body></html>

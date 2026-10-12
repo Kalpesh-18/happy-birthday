@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Joyeux anniversaire, Candice</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎆</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="rain" id="rain"></div><canvas class="fx" id="fx"></canvas>
+<div class="wrap c">
+<h1>The bus stop</h1>
+<p class="sub">A little rain, a brave hero, and one very important birthday wish.</p>
+<div class="hero" id="hero" role="button" tabindex="0" aria-label="Make the city guardian leap">
+<svg viewBox="0 0 220 190" aria-hidden="true">
+<path d="M54 84Q20 88 7 49M49 101Q12 117 7 151M162 72Q198 45 210 22" fill="none" stroke="#ffe7a8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+<path class="cape" d="M82 76Q42 69 27 110L8 166Q61 151 91 124Z" fill="#d75050" stroke="#6d3748" stroke-width="4"/>
+<path d="M92 97L67 146L100 156L126 116Z" fill="#334e6f" stroke="#202641" stroke-width="4"/>
+<path d="M99 143L75 166L48 171L43 183L91 181L116 158Z" fill="#26324e" stroke="#202641" stroke-width="4" stroke-linejoin="round"/>
+<path d="M119 130L132 159L159 168L165 180L119 174L99 151Z" fill="#384d70" stroke="#202641" stroke-width="4" stroke-linejoin="round"/>
+<path d="M92 91L66 79L45 91L69 110L92 108M130 86L158 62L171 68L151 105L130 112" fill="#d7a77e" stroke="#202641" stroke-width="5" stroke-linejoin="round"/>
+<path d="M42 88L33 80L28 92L20 90L27 104L39 101Z M164 65L174 54L179 67L188 64L183 79L171 81Z" fill="#f6c945" stroke="#202641" stroke-width="4" stroke-linejoin="round"/>
+<path d="M82 46Q86 17 119 18Q150 21 150 54L141 82L101 83L82 67Z" fill="#d7a77e" stroke="#202641" stroke-width="5"/>
+<path d="M79 51L63 37L78 35L72 23L91 31L100 14L109 29L125 16L127 32L146 25L145 47L132 42L120 52L105 45L91 54Z" fill="#303349" stroke="#202641" stroke-width="4" stroke-linejoin="round"/>
+<path d="M97 58L108 62M125 58L134 56" stroke="#202641" stroke-width="4" stroke-linecap="round"/>
+<path d="M100 111L119 110L119 123L100 126Z" fill="#f6c945"/>
+</svg>
+</div>
+<div class="card"><p id="wish">Make a wish, then tap the flame.</p>
+<div class="cake" id="cake" role="button" tabindex="0" aria-label="Blow out the candle">🎂<span class="flame">🔥</span></div></div>
+<div class="card" id="fin" style="display:none"><h2>Joyeux anniversaire, Candice 🎉</h2><p id="txt" style="text-align:left"></p></div>
+<p class="c"><a class="btn" href="index.html">Read the letter again ✉️</a></p>
+</div>
+<script src="app.js"></script>
+<script>
+for(let i=0;i<60;i++){const d=document.createElement('i');d.style.left=Math.random()*100+'%';d.style.animationDuration=.6+Math.random()*.6+'s';d.style.animationDelay=-Math.random()+'s';$('#rain').appendChild(d)}
+const cheer=e=>{const hero=$('#hero');hero.animate([{transform:'translateY(0)'},{transform:'translateY(-28px) rotate(-5deg) scale(1.08)'},{transform:'translateY(0)'}],450);burst(e.clientX||innerWidth/2,e.clientY||innerHeight/3,['⭐','⚡','🧡'],9)};
+$('#hero').onclick=cheer;
+$('#hero').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cheer(e)}};
+const cv=$('#fx'),c=cv.getContext('2d');let P=[];function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+function boom(x,y){const h=Math.random()*360;for(let i=0;i<70;i++){const a=Math.random()*6.28,s=Math.random()*6+1;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:70,h})}}
+(function f(){c.clearRect(0,0,cv.width,cv.height);P=P.filter(p=>p.l>0);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.985;p.l--;c.fillStyle=`hsla(${p.h},100%,65%,${p.l/70})`;c.fillRect(p.x,p.y,3,3)});requestAnimationFrame(f)})();
+const msg="Kahn-DEES. (Told you I never got it wrong.) Thank you for being the person who makes a rainy bus stop feel like the start of an adventure. Here's to more train tickets, flight tickets, hikes, tiramisu at exactly the right moment, loud cheering for Les Bleus, and the fluent sarcasm that you bring along. Your teddies are cheering from the front row. Wishing you a very happy birthday, Candice! 🧡";
+$('#cake').onclick=()=>{if($('#cake').classList.contains('out'))return;$('#cake').classList.add('out');$('#wish').textContent='Wish received. Your favorite MHA Hero has been informed. ⭐';$('#fin').style.display='block';
+let i=0;const ty=setInterval(()=>{$('#txt').textContent=msg.slice(0,++i);if(i>=msg.length)clearInterval(ty)},35);
+let b=0;const iv=setInterval(()=>{boom(Math.random()*innerWidth,Math.random()*innerHeight*.5+40);if(++b>14)clearInterval(iv)},350);rain(['🏮','🥖','🧸','🦡','⚽','🍰'],30)};
+</script></body></html>
