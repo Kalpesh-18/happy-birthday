@@ -18,7 +18,7 @@ if(!document.querySelector('nav'))document.body.insertAdjacentHTML('afterbegin',
 if(current==='index.html'||current==='finale.html'){
 const birthdayMusic=new Audio('data/birthday.mp3');
 birthdayMusic.loop=true;
-birthdayMusic.volume=.6;
+birthdayMusic.volume=.3;
 birthdayMusic.preload='auto';
 const startBirthdayMusic=()=>{
 birthdayMusic.play().then(()=>{
